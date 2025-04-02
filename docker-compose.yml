@@ -1,0 +1,21 @@
+services:
+  apigw:
+    build: ./apigw
+    ports:
+      - "4000:4000"
+    depends_on:
+      - productservice
+      - userservice
+    environment:
+      - PRODUCT_SERVICE_URL=http://productservice:4001
+      - USER_SERVICE_URL=http://userservice:4002
+
+  productservice:
+    build: ./productservice
+    ports:
+      - "4001:4001"
+
+  userservice:
+    build: ./userservice
+    ports:
+      - "4002:4002"
