@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 
 const app = express();
@@ -9,21 +10,14 @@ const products = [
 ]; // Static product data
 
 // Add Product
-app.post("/products", (req, res) => {
+app.post("/productsdata", (req, res) => {
     const newProduct = { id: products.length + 1, ...req.body };
     products.push(newProduct);
     res.json({ message: "Product added", product: newProduct });
 });
 
 // Get Products
-app.get("/products", (req, res) => {
-    res.json(products);
-});
-
-//Get products by Id
-app.get("/products/:id", (req, res) => {
-    const product= products.find(u=>u.id === parseInt(req.params.id));
-    if(!product) return res.status(404).send('product does not exist with provided id');
+app.get("/productsdetails", (req, res) => {
     res.json(products);
 });
 
