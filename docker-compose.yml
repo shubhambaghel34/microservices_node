@@ -1,21 +1,36 @@
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ default AMQP port
+      - "15672:15672" # RabbitMQ Management UI
   apigw:
     build: ./apigw
     ports:
       - "4000:4000"
     depends_on:
+      - rabbitmq
       - productservice
       - userservice
     environment:
       - PRODUCT_SERVICE_URL=http://productservice:4001
       - USER_SERVICE_URL=http://userservice:4002
-
+      - RABBITMQ_URL=amqp://rabbitmq
   productservice:
     build: ./productservice
     ports:
       - "4001:4001"
+    depends_on:
+      - rabbitmq   
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq  
 
   userservice:
     build: ./userservice
     ports:
       - "4002:4002"
+    depends_on:
+      - rabbitmq  
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq    
