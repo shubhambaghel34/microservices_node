@@ -27,7 +27,7 @@ This project is a Node.js microservices architecture built with Kafka and Docker
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-repo/microservices-node
+git clone [https://github.com/your-repo/microservices-node](https://github.com/shubhambaghel34/microservices_node)
 cd microservices-node
 ```
 
