@@ -28,6 +28,7 @@ app.post('/publish/:topic', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5004;
+
 app.listen(PORT, () => {
   console.log(`Kafka Service running on http://localhost:${PORT}`);
 });
