@@ -50,3 +50,15 @@ services:
       - kafka
     environment:
       - KAFKA_BROKER=kafka:9092
+# RabbitMQ Service for interacting with RabbitMQ
+  rabbitmqservice:
+    build: ./rabbitmqservice
+    ports:
+      - "5005:5005"  # Optional, only if rabbitmqservice exposes HTTP
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_URL=amqp://user:password@rabbitmq:5672
+
+volumes:
+  rabbitmq_data: {} # Used for RabbitMQ data persistence
